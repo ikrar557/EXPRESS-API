@@ -1,0 +1,20 @@
+version: '1.0'
+name: mern_container_setup
+services:
+  mongo:
+    container_name: mymongo
+    environment:
+      - MONGO_INITDB_DATABASE =users_db
+      - MONGO_INITDB_ROOT_USERNAME=ikrar557
+      - MONGO_INITDB_ROOT_PASSWORD=r4ngk1ng
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    image: mongo
+    command: mongod --auth
+
+volumes:
+  mongodbdata:
+    driver: local
